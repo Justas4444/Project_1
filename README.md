@@ -1,1 +1,1 @@
-"# test" 
+this is my final project. I'm using AI to predict stock market future prices, will add django web application to display the results to registered users.
