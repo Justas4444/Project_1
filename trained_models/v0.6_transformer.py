@@ -184,5 +184,5 @@ def predict():
         else:
             f.write("\n" + new_row)
 
-for i in range(1,3):
+for i in range(1,31):
     predict()

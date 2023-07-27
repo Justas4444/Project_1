@@ -9,8 +9,10 @@ Trained_models folder contains python file that has two functions, train() and p
 Django section coming soon.
 
 
-How does it work
-Models predictions are appended to SPY.csv in csv folder and instead of date as first element in row, they will instead contain the number of days in the future that the model is predicting which in turn depends on what range is selected in a loop that comes after train and predict functions.
+How does it work?
+To run code, please install all modules from requirements.txt
+
+Models predictions are appended to SPY.csv in csv folder and instead of date as first element in row, they will contain the number of days in the future that the model is predicting which in turn depends on what range is selected in a loop that comes after train and predict functions.
 
 Transformer model was chosen after trialing linear dispersion, dense layer and lstm models, which all turned out to be less accurate in terms of mae(mean absolute error).
 
