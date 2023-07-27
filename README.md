@@ -2,7 +2,7 @@ This is my final project. I'm using AI to predict stock market future prices, wi
 
 
 Folder structure
-csv folder contains python code to generate a csv for training and validation of a transformer model.
+csv folder contains python code to generate SPY.csv, used for training and validation of a transformer model. It also generated interest_rate.csv that is appended to SPY.csv later in the code so can be used as a reference.
 
 Trained_models folder contains python file that has two functions, train() and predict(). Once the models are trained, saving them will take place and training function can be commented. Predict function will load models and will use them for predictions with a step of 1 day.
 
