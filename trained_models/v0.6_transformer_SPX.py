@@ -6,9 +6,9 @@ from keras.models import Model
 from keras.layers import Input, Dense
 import os
 
-def train():
+def train_SPX():
     # Load the historical stock price data from "formatted_data.csv"
-    data = pd.read_csv("csv/SPY.csv")
+    data = pd.read_csv("csv/SPX.csv")
 
     # Prepare the features and target variables
     X = data[["Open", "High", "Low", "Close", "Adj Close", "Volume", "Interest Rate"]]
@@ -92,26 +92,26 @@ def train():
     _, mae_volume = model_volume.evaluate(X_test, y6_test)
     _, mae_interest_rate = model_interest_rate.evaluate(X_test, y7_test)
 
-    print("MAE for 'Open' Price:", mae_open)
-    print("MAE for 'High' Price:", mae_high)
-    print("MAE for 'Low' Price:", mae_low)
-    print("MAE for 'Close' Price:", mae_close)
-    print("MAE for 'Adj Close' Price:", mae_adj_close)
-    print("MAE for 'Volume':", mae_volume)
-    print("MAE for 'Interest Rate':", mae_interest_rate)
+    # print("MAE for 'Open' Price:", mae_open)
+    # print("MAE for 'High' Price:", mae_high)
+    # print("MAE for 'Low' Price:", mae_low)
+    # print("MAE for 'Close' Price:", mae_close)
+    # print("MAE for 'Adj Close' Price:", mae_adj_close)
+    # print("MAE for 'Volume':", mae_volume)
+    # print("MAE for 'Interest Rate':", mae_interest_rate)
 
-    model_open.save("trained_models/model_open.h5")
-    model_high.save("trained_models/model_high.h5")
-    model_low.save("trained_models/model_low.h5")
-    model_close.save("trained_models/model_close.h5")
-    model_adj_close.save("trained_models/model_adj_close.h5")
-    model_volume.save("trained_models/model_volume.h5")
-    model_interest_rate.save("trained_models/model_interest_rate.h5")
+    model_open.save("trained_models/SPX_model_open.h5")
+    model_high.save("trained_models/SPX_model_high.h5")
+    model_low.save("trained_models/SPX_model_low.h5")
+    model_close.save("trained_models/SPX_model_close.h5")
+    model_adj_close.save("trained_models/SPX_model_adj_close.h5")
+    model_volume.save("trained_models/SPX_model_volume.h5")
+    model_interest_rate.save("trained_models/SPX_model_interest_rate.h5")
 
-# train()
+# train_SPX()
 
-def predict():
-    data = pd.read_csv("csv/SPY.csv")
+def predict_SPX():
+    data = pd.read_csv("csv/SPX.csv")
 
     # Prepare the features and target variables
     X = data[["Open", "High", "Low", "Close", "Adj Close", "Volume", "Interest Rate"]]
@@ -121,13 +121,13 @@ def predict():
     X_scaled = scaler.fit_transform(X)
 
     #Load models
-    model_open = tf.keras.models.load_model("trained_models/model_open.h5")
-    model_high = tf.keras.models.load_model("trained_models/model_high.h5")
-    model_low = tf.keras.models.load_model("trained_models/model_low.h5")
-    model_close = tf.keras.models.load_model("trained_models/model_close.h5")
-    model_adj_close = tf.keras.models.load_model("trained_models/model_adj_close.h5")
-    model_volume = tf.keras.models.load_model("trained_models/model_volume.h5")
-    model_interest_rate = tf.keras.models.load_model("trained_models/model_interest_rate.h5")
+    model_open = tf.keras.models.load_model("trained_models/SPX_model_open.h5")
+    model_high = tf.keras.models.load_model("trained_models/SPX_model_high.h5")
+    model_low = tf.keras.models.load_model("trained_models/SPX_model_low.h5")
+    model_close = tf.keras.models.load_model("trained_models/SPX_model_close.h5")
+    model_adj_close = tf.keras.models.load_model("trained_models/SPX_model_adj_close.h5")
+    model_volume = tf.keras.models.load_model("trained_models/SPX_model_volume.h5")
+    model_interest_rate = tf.keras.models.load_model("trained_models/SPX_model_interest_rate.h5")
 
     # Extract the last row of data for tomorrow's prediction
     today_values = X_scaled[-1]
@@ -144,17 +144,17 @@ def predict():
     prediction_volume = model_volume.predict(user_today_values_scaled)[0][0]
     prediction_interest_rate = model_interest_rate.predict(user_today_values_scaled)[0][0]
 
-    print(f'Open prediction: {prediction_open}')
-    print(f'High prediction: {prediction_high}')
-    print(f'Low prediction: {prediction_low}')
-    print(f'Close prediction: {prediction_close}')
-    print(f'Adj Close prediction: {prediction_adj_close}')
-    print(f'Volume prediction: {prediction_volume}')
-    print(f'Interest Rate prediction: {prediction_interest_rate}')
+    # print(f'Open prediction: {prediction_open}')
+    # print(f'High prediction: {prediction_high}')
+    # print(f'Low prediction: {prediction_low}')
+    # print(f'Close prediction: {prediction_close}')
+    # print(f'Adj Close prediction: {prediction_adj_close}')
+    # print(f'Volume prediction: {prediction_volume}')
+    # print(f'Interest Rate prediction: {prediction_interest_rate}')
 
     # Convert the predicted values to a list
     predicted_values = [
-        f"+{i}trading day",
+        f"+{i} trading day",
         int(prediction_open),
         int(prediction_high),
         int(prediction_low),
@@ -167,7 +167,7 @@ def predict():
     # Convert the list to a comma-separated string
     new_row = ",".join(str(value) for value in predicted_values)
 
-    csv_file = "csv/SPY.csv"
+    csv_file = "csv/SPX.csv"
 
     # Read the last line of the CSV to check if it ends with a newline
     with open(csv_file, "rb") as f:
@@ -184,5 +184,5 @@ def predict():
         else:
             f.write("\n" + new_row)
 
-for i in range(1,31):
-    predict()
+# for i in range(1,91):
+#     predict_SPX()

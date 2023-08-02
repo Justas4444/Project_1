@@ -6,7 +6,7 @@ from datetime import datetime, date, timedelta
 # #NOTE: Imports SPY Index----------------------------------------------------------------------------------------------------------------------------
 
 # Define the ticker symbol
-ticker = "SPY"
+ticker = "^NDX"
 
 # Get the current date
 current_date = datetime.now().strftime("%Y-%m-%d")
@@ -15,7 +15,7 @@ current_date = datetime.now().strftime("%Y-%m-%d")
 data = yf.download(ticker, start="1993-01-29", end=current_date)
 
 # Save the data as a CSV file
-data.to_csv("SPY.csv")
+data.to_csv("NDX.csv")
 
 
 #NOTE: Creates interest rate file----------------------------------------------------------------------------------------------------------------
@@ -39,8 +39,8 @@ formatted_dates = [
     date + ", 0" if date >= "2023-12-01" else
     date + ", 0" if date >= "2023-11-01" else
     date + ", 0" if date >= "2023-10-01" else
-    date + ", 0" if date >= "2023-09-01" else
-    date + ", 0" if date >= "2023-08-01" else
+    date + ", 5.33" if date >= "2023-09-01" else
+    date + ", 5.33" if date >= "2023-08-01" else
     date + ", 5.08" if date >= "2023-07-01" else
     date + ", 5.08" if date >= "2023-06-01" else
     date + ", 5.08" if date >= "2023-05-01" else
@@ -452,7 +452,7 @@ df.to_csv("interest_rates.csv", index=False)
 
 
 # Assuming you have the data in files named "SPY.csv" and "interest_rates.csv"
-filename1 = "SPY.csv"
+filename1 = "NDX.csv"
 filename2 = "interest_rates.csv"
 
 # Create a dictionary to store date-value pairs from interest_rates.csv
@@ -513,7 +513,7 @@ def append_interest_rate_to_first_row(csv_file):
         csv_writer.writerows(rows)
 
 # Replace 'SPY.csv' with the actual path to your CSV file
-csv_file_path = 'SPY.csv'
+csv_file_path = 'NDX.csv'
 append_interest_rate_to_first_row(csv_file_path)
 
 
@@ -530,11 +530,11 @@ def write_formatted_csv(input_file):
         for row in reader:
             formatted_row = [
                 row[0],
-                int(float(row[1]) * 10),
-                int(float(row[2]) * 10),
-                int(float(row[3]) * 10),
-                int(float(row[4]) * 10),
-                int(float(row[5]) * 10),
+                int(float(row[1])),
+                int(float(row[2])),
+                int(float(row[3])),
+                int(float(row[4])),
+                int(float(row[5])),
                 row[6].strip(),
                 row[7].strip()
             ]
@@ -549,5 +549,5 @@ def write_formatted_csv(input_file):
             writer.writerow(row)
 
 if __name__ == "__main__":
-    input_file = "SPY.csv"
+    input_file = "NDX.csv"
     write_formatted_csv(input_file)

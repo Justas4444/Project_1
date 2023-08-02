@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock Predictions</title>
+</head>
+<body>
+    <h1>Stock Predictions</h1>
+    <form method="get">
+        <label for="symbol">Select a stock symbol:</label>
+        <select name="symbol" id="symbol">
+            <option value="">--All--</option>
+            {% for symbol in stock_symbols %}
+                <option value="{{ symbol.symbol }}" {% if selected_symbol == symbol.symbol %}selected{% endif %}>
+                    {{ symbol }}
+                </option>
+            {% endfor %}
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+    {% if predictions %}
+        <h2>Predictions for {{ selected_symbol }}</h2>
+        <table>
+            <tr>
+                <th>Date</th>
+                <th>Predicted Open</th>
+                <th>Predicted High</th>
+                <th>Predicted Low</th>
+                <th>Predicted Close</th>
+                <th>Predicted Adj. Close</th>
+                <th>Predicted Volume</th>
+                <th>Predicted Interest Rate</th>
+            </tr>
+            {% for prediction in predictions %}
+                <tr>
+                    <td>{{ prediction.predicted_date }}</td>
+                    <td>{{ prediction.predicted_open }}</td>
+                    <td>{{ prediction.predicted_high }}</td>
+                    <td>{{ prediction.predicted_low }}</td>
+                    <td>{{ prediction.predicted_close }}</td>
+                    <td>{{ prediction.predicted_adjclose }}</td>
+                    <td>{{ prediction.predicted_volume }}</td>
+                    <td>{{ prediction.predicted_interest_rate }}</td>
+                </tr>
+            {% endfor %}
+        </table>
+    {% endif %}
+</body>
+</html>
