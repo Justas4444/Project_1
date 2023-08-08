@@ -4,6 +4,16 @@
     <title>Stock Predictions</title>
 </head>
 <body>
+    <div class="col-sm-2">
+        {% block sidebar %}
+            <ul class="sidebar-nav">
+                <li><a href="{% url 'homepage' %}">Home</a></li>
+                <li><a href="{% url 'predictions' %}">Stock future price predictions</a></li>
+                <li><a href="">Login</a></li>
+                <li><a href="">Register</a></li>
+            </ul>
+        {% endblock %}
+    </div>
     <h1>Stock Predictions</h1>
     <form method="get">
         <label for="symbol">Select a stock symbol:</label>
@@ -47,3 +57,4 @@
     {% endif %}
 </body>
 </html>
+

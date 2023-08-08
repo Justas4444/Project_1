@@ -22,3 +22,22 @@ def predictions_view(request):
     }
 
     return render(request, 'predictions.html', context)
+
+def index(request):
+    num_spx_predictions = StockPrediction.objects.filter.filter(stock_symbol__symbol="SPX - S&P 500 INDEX") 
+    num_ndx_predictions = StockPrediction.objects.filter.filter(stock_symbol__symbol="NDX - Nasdaq-100") 
+    num_symbols = StockSymbol.objects.all().count()
+
+    context = {
+        'num_spx_predictions': num_spx_predictions,
+        'num_ndx_predictions': num_ndx_predictions,
+        'num_symbols': num_symbols,
+    }
+
+    return render(request, 'index.html', context=context)
+
+
+from django.shortcuts import render
+
+def homepage_view(request):
+    return render(request, 'homepage.html')  # Render the homepage template
