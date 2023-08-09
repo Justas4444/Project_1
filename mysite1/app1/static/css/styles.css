@@ -3,3 +3,24 @@
     padding: 0;
     list-style: none;
 }
+
+.pagination {
+    margin-top: 20px;
+}
+
+.step-links {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.step-links a {
+    padding: 4px 8px;
+    text-decoration: none;
+    border: 1px solid #ccc;
+}
+
+.current-page {
+    font-weight: bold;
+    padding: 4px 8px;
+    border: 1px solid #ccc;
+}

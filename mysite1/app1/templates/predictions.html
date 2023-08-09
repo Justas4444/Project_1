@@ -1,57 +1,84 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Stock Predictions</title>
+    <title>StockPredictions.com</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <!-- Add additional CSS in static file -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link rel="icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
 </head>
 <body>
-    <div class="col-sm-2">
-        {% block sidebar %}
-            <ul class="sidebar-nav">
-                <li><a href="{% url 'homepage' %}">Home</a></li>
-            </ul>
-        {% endblock %}
-    </div>
-    <h1>Stock Predictions</h1>
-    <form method="get">
-        <label for="symbol">Select a stock symbol:</label>
-        <select name="symbol" id="symbol">
-            <option value="">--All--</option>
-            {% for symbol in stock_symbols %}
-                <option value="{{ symbol.symbol }}" {% if selected_symbol == symbol.symbol %}selected{% endif %}>
-                    {{ symbol }}
-                </option>
-            {% endfor %}
-        </select>
-        <button type="submit">Submit</button>
-    </form>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2">
+                <ul class="sidebar-nav">
+                    <li><a href="{% url 'homepage' %}">Home</a></li>
+                    <li><a href="{% url 'predictions' %}">Stock future price predictions</a></li>
+                    <li><a href="">Login</a></li>
+                    <li><a href="">Register</a></li>
+                </ul>
+            </div>
+            <div class="col-sm-10">
+                <h1>Stock Predictions</h1>
+                <form method="get">
+                    <label for="symbol">Select a stock symbol:</label>
+                    <select name="symbol" id="symbol">
+                        <option value="">--All--</option>
+                        {% for symbol in stock_symbols %}
+                            <option value="{{ symbol.symbol }}" {% if selected_symbol == symbol.symbol %}selected{% endif %}>
+                                {{ symbol }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    <button type="submit">Submit</button>
+                </form>
 
-    {% if predictions %}
-        <h2>Predictions for {{ selected_symbol }}</h2>
-        <table>
-            <tr>
-                <th>Date</th>
-                <th>Predicted Open</th>
-                <th>Predicted High</th>
-                <th>Predicted Low</th>
-                <th>Predicted Close</th>
-                <th>Predicted Adj. Close</th>
-                <th>Predicted Volume</th>
-                <th>Predicted Interest Rate</th>
-            </tr>
-            {% for prediction in predictions %}
-                <tr>
-                    <td>{{ prediction.predicted_date }}</td>
-                    <td>{{ prediction.predicted_open }}</td>
-                    <td>{{ prediction.predicted_high }}</td>
-                    <td>{{ prediction.predicted_low }}</td>
-                    <td>{{ prediction.predicted_close }}</td>
-                    <td>{{ prediction.predicted_adjclose }}</td>
-                    <td>{{ prediction.predicted_volume }}</td>
-                    <td>{{ prediction.predicted_interest_rate }}</td>
-                </tr>
-            {% endfor %}
-        </table>
-    {% endif %}
+                {% if page %}
+                    <br>
+                    <h2>Predictions for {{ selected_symbol }}</h2>
+                    <table>
+                        <tr>
+                            <th>Date</th>
+                            <th>Predicted Open</th>
+                            <th>Predicted High</th>
+                            <th>Predicted Low</th>
+                            <th>Predicted Close</th>
+                            <th>Predicted Adj. Close</th>
+                            <th>Predicted Volume</th>
+                            <th>Predicted Interest Rate</th>
+                        </tr>
+                        {% for prediction in page %}
+                            <tr>
+                                <td>{{ prediction.predicted_date }}</td>
+                                <td>{{ prediction.predicted_open }}</td>
+                                <td>{{ prediction.predicted_high }}</td>
+                                <td>{{ prediction.predicted_low }}</td>
+                                <td>{{ prediction.predicted_close }}</td>
+                                <td>{{ prediction.predicted_adjclose }}</td>
+                                <td>{{ prediction.predicted_volume }}</td>
+                                <td>{{ prediction.predicted_interest_rate }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                    <div class="pagination">
+                        <span class="step-links">
+                            {% if page.has_previous %}
+                                <a href="?symbol={{ selected_symbol }}&page=1">&laquo; first</a>
+                                <a href="?symbol={{ selected_symbol }}&page={{ page.previous_page_number }}">previous</a>
+                            {% endif %}
+                            <span class="current-page">{{ page.number }}</span>
+                            {% if page.has_next %}
+                                <a href="?symbol={{ selected_symbol }}&page={{ page.next_page_number }}">next</a>
+                                <a href="?symbol={{ selected_symbol }}&page={{ page.paginator.num_pages }}">last &raquo;</a>
+                            {% endif %}
+                        </span>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </body>
 </html>
-
