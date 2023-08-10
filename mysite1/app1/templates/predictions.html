@@ -17,8 +17,12 @@
                 <ul class="sidebar-nav">
                     <li><a href="{% url 'homepage' %}">Home</a></li>
                     <li><a href="{% url 'predictions' %}">Stock future price predictions</a></li>
-                    <li><a href="">Login</a></li>
+                    <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
                     <li><a href="">Register</a></li>
+                    {% if user.is_authenticated %}
+                    <li><a href="{% url 'logout'%}">Logout</a></li><br>
+                    <li>{{ user.get_username }}</li>
+                    {% endif %}<br>
                 </ul>
             </div>
             <div class="col-sm-10">

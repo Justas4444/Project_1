@@ -25,4 +25,9 @@ def predictions_view(request):
     return render(request, 'predictions.html', context)
 
 def homepage_view(request):
-    return render(request, 'homepage.html')  # Render the homepage template
+    num_visits = request.session.get('num_visits', 1)
+    request.session['num_visits'] = num_visits + 1
+    context = {
+        'num_visits': num_visits,
+    }
+    return render(request, 'homepage.html', context=context)  # Render the homepage template
