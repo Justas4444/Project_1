@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import StockSymbol, StockPrediction
+from .models import StockSymbol, StockPrediction, Profile
 
 # Register your models here.
 
@@ -15,3 +15,4 @@ class StockPredictionAdmin(admin.ModelAdmin):
 
 admin.site.register(StockSymbol, StockSymbolAdmin)
 admin.site.register(StockPrediction, StockPredictionAdmin)
+admin.site.register(Profile)

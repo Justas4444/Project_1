@@ -25,6 +25,7 @@
           {% if user.is_authenticated %}
           <li><a href="{% url 'homepage' %}">Home</a></li>
           <li><a href="{% url 'predictions' %}">Stock future price predictions</a></li>
+          <li><a href="{% url 'profile'%}">Profile</a></li>
           <li><a href="{% url 'logout'%}">Logout</a></li><br>
           <li>{{ user.get_username }}</li>
           {% endif %}<br>

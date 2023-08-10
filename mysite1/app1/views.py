@@ -3,6 +3,7 @@ from django.shortcuts import render
 from .models import StockSymbol, StockPrediction
 from django.shortcuts import redirect
 from django.contrib.auth.forms import User
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
 
@@ -64,3 +65,7 @@ def register(request):
             messages.error(request, 'Passwords do not match!')
             return redirect('register')
     return render(request, 'register.html')
+
+@login_required
+def profile(request):
+    return render(request, 'profile.html')

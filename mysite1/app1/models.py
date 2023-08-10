@@ -32,3 +32,19 @@ class StockPrediction(models.Model):
         verbose_name = "Stock Prediction"
         verbose_name_plural = "Stock Predictions"
         unique_together = ('stock_symbol', 'predicted_date' , 'predicted_open', 'predicted_high', 'predicted_low', 'predicted_close', 'predicted_adjclose', 'predicted_volume', 'predicted_interest_rate')
+
+class User(models.Model):
+    username = models.TextField(max_length=500, blank=True)
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    bio = models.TextField(max_length=500, blank=True)
+    
+    def __str__(self):
+        return self.username
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    picture = models.ImageField(default="profile_pics/default.png", upload_to="profile_pics")
+
+    def __str__(self):
+        return f"{self.user.username} profile"
