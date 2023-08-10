@@ -16,11 +16,15 @@
       <div class="col-sm-2">
       {% block sidebar %}
         <ul class="sidebar-nav">
+          {% if not user.is_authenticated %}
           <li><a href="{% url 'homepage' %}">Home</a></li>
           <li><a href="{% url 'predictions' %}">Stock future price predictions</a></li>
           <li><a href="{% url 'login'%}?next={{request.path}}">Login</a></li>
           <li><a href="{% url 'register' %}">Register</a></li>
+          {% endif %}
           {% if user.is_authenticated %}
+          <li><a href="{% url 'homepage' %}">Home</a></li>
+          <li><a href="{% url 'predictions' %}">Stock future price predictions</a></li>
           <li><a href="{% url 'logout'%}">Logout</a></li><br>
           <li>{{ user.get_username }}</li>
           {% endif %}<br>
