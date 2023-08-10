@@ -6,7 +6,7 @@ csv folder contains python code to generate SPY.csv, used for training and valid
 
 Trained_models folder contains python file that has two functions, train() and predict(). Once the models are trained, saving them will take place and training function can be commented. Predict function will load models and will use them for predictions with a step of 1 day.
 
-Django section coming soon.
+mysite1 is a folder containing django website that displays predictions to registered users.
 
 
 How does it work?
@@ -20,4 +20,3 @@ I have used 2000 epochs as a base for training, after trying multiple options, a
 
 A possible improvement to this model could be early stopping callback to detect convergence and more importantly restore optimal weights, while reducing training time. Althought to me it proved to be less accurate, I am sure having more time to play with settings it could have worked.
 
-Django section coming soon.
