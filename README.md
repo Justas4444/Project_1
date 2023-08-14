@@ -1,4 +1,4 @@
-This is my final project. I'm using AI to predict stock market future prices, will add django web application to display the results for registered users.
+This is my final project. I'm using AI to predict stock market future prices and displaying predictions using django website.
 
 Folder structure
 csv folder contains python code to generate SPY.csv, used for training and validation of a transformer model. It also generated interest_rate.csv that is appended to SPY.csv later in the code so can be used as a reference.
