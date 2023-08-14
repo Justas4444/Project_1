@@ -184,5 +184,5 @@ def predict_NDX():
         else:
             f.write("\n" + new_row)
 
-# for i in range(1,91):
-#     predict_NDX()
+for i in range(1,91):
+    predict_NDX()

@@ -41,7 +41,7 @@
                     <form method="get">
                         <label for="symbol">Select a stock symbol:</label>
                         <select name="symbol" id="symbol">
-                            <option value="">--All--</option>
+                            <option value="">--Please choose index--</option>
                             {% for symbol in stock_symbols %}
                                 <option value="{{ symbol.symbol }}" {% if selected_symbol == symbol.symbol %}selected{% endif %}>
                                     {{ symbol }}

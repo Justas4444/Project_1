@@ -12,7 +12,7 @@ ticker = "^NDX"
 current_date = datetime.now().strftime("%Y-%m-%d")
 
 # Download the data
-data = yf.download(ticker, start="1993-01-29", end=current_date)
+data = yf.download(ticker, start="1993-01-29", end=current_date) 
 
 # Save the data as a CSV file
 data.to_csv("NDX.csv")

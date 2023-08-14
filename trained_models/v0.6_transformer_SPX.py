@@ -184,5 +184,5 @@ def predict_SPX():
         else:
             f.write("\n" + new_row)
 
-# for i in range(1,91):
-#     predict_SPX()
+for i in range(1,91):
+    predict_SPX()
