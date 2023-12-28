@@ -36,9 +36,9 @@ while current_date <= end_date:
 # Add ", 0", ", 3", or ", 1" after the date for specific date ranges
 formatted_dates = [
     #2023
-    date + ", 0" if date >= "2023-12-01" else
-    date + ", 0" if date >= "2023-11-01" else
-    date + ", 0" if date >= "2023-10-01" else
+    date + ", 5.33" if date >= "2023-12-01" else
+    date + ", 5.33" if date >= "2023-11-01" else
+    date + ", 5.33" if date >= "2023-10-01" else
     date + ", 5.33" if date >= "2023-09-01" else
     date + ", 5.33" if date >= "2023-08-01" else
     date + ", 5.08" if date >= "2023-07-01" else

@@ -72,7 +72,7 @@ def train_SPX():
     _, _, y7_train, y7_test = train_test_split(X_scaled, y7, test_size=0.2, random_state=42)
 
     # Train each model separately
-    epochs = 2000
+    epochs = 200
     batch_size = 128
 
     model_open.fit(X_train, y1_train, epochs=epochs, batch_size=batch_size, validation_split=0.2)
@@ -108,7 +108,7 @@ def train_SPX():
     model_volume.save("trained_models/SPX_model_volume.h5")
     model_interest_rate.save("trained_models/SPX_model_interest_rate.h5")
 
-# train_SPX()
+train_SPX()
 
 def predict_SPX():
     data = pd.read_csv("csv/SPX.csv")
